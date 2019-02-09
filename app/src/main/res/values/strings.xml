@@ -14,6 +14,19 @@
     <string name="btnBack">Back</string>
     <string name="fromLabel">From: </string>
     <string name="toLabel">To: </string>
+    <string name="error">Error</string>
+    <string name="tempFahrenheitHint">° F</string>
+    <string name="tempKelvinHint">° K</string>
+    <string name="weightPoundsHint">Lbs</string>
+    <string name="weightOuncesHint">Oz</string>
+    <string name="distanceFeetHint">Ft</string>
+    <string name="distanceInchesHint">In</string>
+    <string name="distanceYardsHint">Yds</string>
+    <string name="distanceMilesHint">Mi</string>
+    <string name="volumeGallonsHint">Gal</string>
+    <string name="volumeOuncesHint">Oz</string>
+
+
 
     <string-array name="metricWeightArray">
         <item>Grams</item>
@@ -42,11 +55,11 @@
         <item>Yards</item>
         <item>Miles</item>
     </string-array>
-    <string-array name="metricVolume">
+    <string-array name="metricVolumeArray">
         <item>Millilitres</item>
         <item>Liters</item>
     </string-array>
-    <string-array name="standardVolume">
+    <string-array name="standardVolumeArray">
         <item>Ounces</item>
         <item>Gallons</item>
     </string-array>
