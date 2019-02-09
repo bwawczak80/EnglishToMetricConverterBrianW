@@ -1,39 +1,36 @@
 package net.wawczak.brian.englishtometricconverterbrianw;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import java.text.DecimalFormat;
 
 public class Converter extends AppCompatActivity {
 
-//TODO
-    //format converted value output
-    //update conversionResult Window
-    //change ui colors
 
-    Double standardInput;
-    String conversionResult;
+    double standardInput;
     String standardSpinnerArray[];
     String metricSpinnerArray[];
+    String roundedValue;
+    String standardStr;
+    String metricStr;
+    double convertedValue;
+    int id;
+
     Spinner spinStandard;
     Spinner spinMetric;
 
-    String standardStr;
-    String metricStr;
-    Double convertedTemp;
-    int id;
+    DecimalFormat roundConversion = new DecimalFormat("###,###.##");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_converter);
-
         TextView converterTitle = findViewById(R.id.idConverterTitle);
         final TextView displayConversion = findViewById(R.id.idDisplayConversion);
         final EditText inputStandard = findViewById(R.id.idInputStandard);
@@ -49,30 +46,26 @@ public class Converter extends AppCompatActivity {
         }
         //users MainActivity radioButton choice determines the case.  The appropriate spinner arrays
         //are referenced from strings.xml, and passed to the setSpinner method.
+        //Title text is set
         switch (id) {
             case 0:
                 converterTitle.setText(getString(R.string.error));
                 break;
             case 1:
-                //inputStandard.setHint(getString(R.string.tempFahrenheitHint));
                 standardSpinnerArray = getResources().getStringArray(R.array.standardTempArray);
                 metricSpinnerArray = getResources().getStringArray(R.array.metricTempArray);
                 converterTitle.setText(getString(R.string.temp));
-                displayConversion.setText(conversionResult);
                 setSpinner(standardSpinnerArray, metricSpinnerArray);
                 break;
             case 2:
                 standardSpinnerArray = getResources().getStringArray(R.array.standardWeightArray);
                 metricSpinnerArray = getResources().getStringArray(R.array.metricWeightArray);
                 converterTitle.setText(getString(R.string.weight));
-                displayConversion.setText(conversionResult);
                 setSpinner(standardSpinnerArray, metricSpinnerArray);
                 break;
             case 3:
                 standardSpinnerArray = getResources().getStringArray(R.array.standardDistanceArray);
                 metricSpinnerArray = getResources().getStringArray(R.array.metricDistanceArray);
-                converterTitle.setText(getString(R.string.weight));
-                displayConversion.setText(conversionResult);
                 setSpinner(standardSpinnerArray, metricSpinnerArray);
                 converterTitle.setText(getString(R.string.length));
                 break;
@@ -80,7 +73,6 @@ public class Converter extends AppCompatActivity {
                 standardSpinnerArray = getResources().getStringArray(R.array.standardVolumeArray);
                 metricSpinnerArray = getResources().getStringArray(R.array.metricVolumeArray);
                 converterTitle.setText(getString(R.string.volume));
-                displayConversion.setText(conversionResult);
                 setSpinner(standardSpinnerArray, metricSpinnerArray);
                 break;
 
@@ -92,28 +84,35 @@ public class Converter extends AppCompatActivity {
 
 
                 //get user input and parse to a Double
-                standardInput = Double.parseDouble(inputStandard.getText().toString());
+                try {
+                    standardInput = Double.parseDouble(inputStandard.getText().toString());
 
-                // determine conversion type from spinner
-                standardStr = spinStandard.getSelectedItem().toString();
-                metricStr = spinMetric.getSelectedItem().toString();
+                    // passes spinner data and user input to appropriate conversion method.
 
-                switch (id) {
-                    case 1:
-                        convertedTemp = tempConversion(standardStr, standardInput);
-                        break;
-                    case 2:
-                        convertedTemp = weightConversion(standardStr, metricStr, standardInput);
-                        break;
-                    case 3:
-                        convertedTemp = distanceConversion(standardStr, metricStr,standardInput);
-                        break;
-                    case 4:
-                        convertedTemp = volumeConversion(standardStr, metricStr, standardInput);
-                        break;
+                    standardStr = spinStandard.getSelectedItem().toString();
+                    metricStr = spinMetric.getSelectedItem().toString();
 
+                    switch (id) {
+                        case 1:
+                            convertedValue = tempConversion(standardStr, standardInput);
+                            break;
+                        case 2:
+                            convertedValue = weightConversion(standardStr, metricStr, standardInput);
+                            break;
+                        case 3:
+                            convertedValue = distanceConversion(standardStr, metricStr,standardInput);
+                            break;
+                        case 4:
+                            convertedValue = volumeConversion(standardStr, metricStr, standardInput);
+                            break;
+
+                    }
+                    // rounds the converted value and sets the textView
+                    roundedValue = roundConversion.format(convertedValue);
+                    displayConversion.setText(String.format("%s %s = %s %s", standardInput, standardStr, roundedValue, metricStr));
+                } catch (NumberFormatException e) {
+                    displayConversion.setText(getString(R.string.errMsg));
                 }
-                displayConversion.setText(String.format("%s %s = %s %s", standardInput, standardStr, convertedTemp, metricStr));
 
             }
         });
@@ -138,16 +137,19 @@ public class Converter extends AppCompatActivity {
 
     }
 
+    //converts temps and returns converted value
     public double tempConversion(String selector, double standardDegrees) {
         double convertedTemp = 0;
         if (selector.equals("Fahrenheit")) { //Fahrenheit
             convertedTemp = (standardDegrees - 32) * .5556;
         } else if (selector.equals("Kelvin")) { //Kelvin
             convertedTemp = (standardDegrees - 273.15);
+
         }
         return convertedTemp;
     }
 
+    //converts weight and returns converted value
     public double weightConversion(String standardSelector, String metricSelector, double standardWeight) {
         double convertedWeight = 0;
 
@@ -172,6 +174,7 @@ public class Converter extends AppCompatActivity {
         return convertedWeight;
     }
 
+    //converts distance and returns converted value
     public double distanceConversion(String standardSelector, String metricSelector, double standardDistance){
         double convertedWeight = 0;
         switch (standardSelector) {
@@ -247,6 +250,7 @@ public class Converter extends AppCompatActivity {
         return convertedWeight;
     }
 
+    //converts volume and returns converted value
     public double volumeConversion(String standardSelector, String metricSelector, double standardVolume){
         double convertedVolume = 0;
         switch(standardSelector){

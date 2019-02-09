@@ -5,8 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     RadioButton rbWeight;
     RadioButton rbLength;
     RadioButton rbVolume;
+    RadioGroup rbGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,35 +30,31 @@ public class MainActivity extends AppCompatActivity {
         rbWeight = findViewById(R.id.rbWeight);
         rbLength= findViewById(R.id.rbLength);
         rbVolume= findViewById(R.id.rbVolume);
+        rbGroup = findViewById(R.id.idRadGroup);
 
-        rbTemp.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        //Changes conversion chart text
+        rbGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                txtTable.setText(getString(R.string.tempChart));
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId){
+                    case R.id.rbTemp:
+                        txtTable.setText(getString(R.string.tempChart));
+                        break;
+                    case R.id.rbLength:
+                        txtTable.setText(getString(R.string.lengthChart));
+                        break;
+                    case R.id.rbWeight:
+                        txtTable.setText(getString(R.string.weightChart));
+                        break;
+                    case R.id.rbVolume:
+                        txtTable.setText(getString(R.string.volumeChart));
+                        break;
+                }
             }
         });
 
-        rbWeight.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                txtTable.setText(getString(R.string.weightChart));
-            }
-        });
-
-        rbLength.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                txtTable.setText(getString(R.string.lengthChart));
-            }
-        });
-
-        rbVolume.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                txtTable.setText(getString(R.string.volumeChart));
-            }
-        });
-
+        // creates a radio button identifier and passes it to the new intent method
+        // this is used to determine which conversion to apply
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,9 +72,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    // creates a new intent and passes the radio button identifier
    public void newIntent(int id){
        Intent conversion = new Intent(MainActivity.this, Converter.class);
        conversion.putExtra("UserChoice",id);
        startActivity(conversion);
     }
+
 }

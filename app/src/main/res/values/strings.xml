@@ -6,10 +6,11 @@
     <string name="length">Length</string>
     <string name="volume">Volume</string>
     <string name="btnNext">Next</string>
-    <string name="tempChart">C° = (x°F - 32) / 1.8\nC = K - 273.15</string>
-    <string name="weightChart">Pounds to Kilograms: kg = lbs * 0.453592\nOunces to Grams: g = oz/0.035274\n</string>
-    <string name="lengthChart">Feet to Meters: m = ft / 3.2808\nInches to Centimeters: cm = in / 0.39370\nMillimeters to Inches: mm = in / 0.039370</string>
-    <string name="volumeChart">Millilitres to Ounces: \nLiters to Gallons: \nLiters to Ounces: </string>
+    <string name="tempChart">Fahrenheit to Celsius:\nC = (F - 32) * .5556\n\nKelvin to Celsius:\nC = K - 273.15\n</string>
+    <string name="weightChart">Pounds to Kilograms:\nkg = lbs * 0.453592\n\nOunces to Grams:\n g = oz * 28.3495\n\n</string>
+    <string name="lengthChart">Feet to Meters:\n m = ft * .3048\n\nInches to Centimeters:\n cm = in * 2.54\n\nInches to Millimeters:\n mm = in * 25.4\n\nMiles to Kilometers:\n
+    km = mi * 1.60934\n\n</string>
+    <string name="volumeChart">Fluid Ounces to Millilitres:\nmL = fl oz * 29.5735\n\nGallons to Liters:\n L = gal * 3.78541\n\nFluid Ounces to Liters:\nL = fl oz * 33.814\n\n </string>
     <string name="btnConvert">Convert</string>
     <string name="btnBack">Back</string>
     <string name="fromLabel">From: </string>
@@ -25,6 +26,8 @@
     <string name="distanceMilesHint">Mi</string>
     <string name="volumeGallonsHint">Gal</string>
     <string name="volumeOuncesHint">Oz</string>
+    <string name="errMsg">You must enter a value</string>
+    <string name="convertValue">value to convert</string>
 
 
 
