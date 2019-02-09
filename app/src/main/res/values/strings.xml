@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">EnglishToMetricConverterBrianW</string>
+    <string name="txtTitle">English to Metric Converter</string>
+    <string name="temp">Temperature</string>
+    <string name="weight">Weight</string>
+    <string name="length">Length</string>
+    <string name="volume">Volume</string>
+    <string name="btnNext">Next</string>
+    <string name="tempChart">C° = (x°F - 32) / 1.8\nC = K - 273.15</string>
+    <string name="weightChart">Pounds to Kilograms: kg = lbs * 0.453592\nOunces to Grams: g = oz/0.035274\n</string>
+    <string name="lengthChart">Feet to Meters: m = ft / 3.2808\nInches to Centimeters: cm = in / 0.39370\nMillimeters to Inches: mm = in / 0.039370</string>
+    <string name="volumeChart">Millilitres to Ounces: \nLiters to Gallons: \nLiters to Ounces: </string>
+    <string name="btnConvert">Convert</string>
+    <string name="btnBack">Back</string>
+    <string name="fromLabel">From: </string>
+    <string name="toLabel">To: </string>
+
+    <string-array name="metricWeightArray">
+        <item>Grams</item>
+        <item>Kilograms</item>
+    </string-array>
+    <string-array name="standardWeightArray">
+        <item>Pounds</item>
+        <item>Ounces</item>
+    </string-array>
+    <string-array name="metricTempArray">
+        <item>Celsius</item>
+    </string-array>
+    <string-array name="standardTempArray">
+        <item>Fahrenheit</item>
+        <item>Kelvin</item>
+    </string-array>
+    <string-array name="metricDistanceArray">
+        <item>Meters</item>
+        <item>Centimeters</item>
+        <item>Millimeters</item>
+        <item>Kilometers</item>
+    </string-array>
+    <string-array name="standardDistanceArray">
+        <item>Feet</item>
+        <item>Inches</item>
+        <item>Yards</item>
+        <item>Miles</item>
+    </string-array>
+    <string-array name="metricVolume">
+        <item>Millilitres</item>
+        <item>Liters</item>
+    </string-array>
+    <string-array name="standardVolume">
+        <item>Ounces</item>
+        <item>Gallons</item>
+    </string-array>
+
+</resources>
